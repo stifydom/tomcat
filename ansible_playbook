@@ -67,9 +67,12 @@
            path: /etc/systemd/system/tomcat.service
            mode: 0755
 
-       - name: start tomcat
-         command: systemctl stop tomcat.service
-
-       - name: start tomcat
-         command: systemctl start tomcat.service
+	 notify: restart tomcat
+      handlers:
+       - name: restart tomcat
+         service:
+           name=tomcat
+           state=restarted
+         
+       
 
